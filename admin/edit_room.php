@@ -34,18 +34,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $ext = pathinfo($filename, PATHINFO_EXTENSION);
         if (in_array(strtolower($ext), $allowed)) {
             $new_name = uniqid() . '.' . $ext;
-            if (move_uploaded_file($_FILES['image']['tmp_name'], '../uploads/rooms/' . $new_name)) {
+            $upload_path = dirname(__DIR__) . '/uploads/rooms/' . $new_name;
+            if (move_uploaded_file($_FILES['image']['tmp_name'], $upload_path)) {
                 $update_img = ", image='$new_name'";
+            } else {
+                $error = "Failed to move uploaded file.";
             }
+        } else {
+            $error = "Invalid file type. Only JPG, JPEG, PNG, and GIF are allowed.";
         }
+    } elseif (isset($_FILES['image']) && $_FILES['image']['error'] != 4) {
+        $error = "Image upload error code: " . $_FILES['image']['error'];
     }
     
-    $sql = "UPDATE rooms SET name='$name', type='$type', price='$price', description='$description', status='$status', amenities='$amenities' $update_img WHERE id='$id'";
-    if ($conn->query($sql) === TRUE) {
-        header("Location: rooms.php?success=Room updated successfully");
-        exit();
-    } else {
-        $error = "Error updating room: " . $conn->error;
+    if (empty($error)) {
+        $sql = "UPDATE rooms SET name='$name', type='$type', price='$price', description='$description', status='$status', amenities='$amenities' $update_img WHERE id='$id'";
+        if ($conn->query($sql) === TRUE) {
+            header("Location: rooms.php?success=Room updated successfully");
+            exit();
+        } else {
+            $error = "Error updating room: " . $conn->error;
+        }
     }
 }
 
