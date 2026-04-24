@@ -1,0 +1,237 @@
+:root {
+    --primary-color: #8C4A2F; /* Terracotta Red */
+    --secondary-color: #2D1B10; /* Dark Timber */
+    --accent-color: #A35A3D; /* Lighter Terracotta */
+    --bg-light: #F5F5F0; /* Muted Cream */
+    --text-dark: #2D1B10;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
+}
+
+/* Overrides for Bootstrap Classes */
+.bg-light {
+    background-color: var(--bg-light) !important;
+}
+
+.bg-white {
+    background-color: #ffffff !important;
+}
+
+.text-muted {
+    color: #665042 !important;
+}
+
+/* Navbar Styling */
+.navbar {
+    background: rgba(245, 245, 240, 0.95) !important;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 6px -1px rgba(45, 27, 16, 0.1);
+    transition: all 0.3s ease;
+    border-bottom: 2px solid var(--primary-color);
+}
+
+.navbar-brand {
+    font-weight: 700;
+    color: var(--secondary-color) !important;
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+}
+
+.navbar-brand i {
+    color: var(--primary-color) !important;
+}
+
+.nav-link {
+    font-weight: 500;
+    color: var(--secondary-color) !important;
+    position: relative;
+    padding: 0.5rem 1rem;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: var(--primary-color) !important;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 50%;
+    background-color: var(--primary-color);
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+    left: 0;
+}
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(rgba(45, 27, 16, 0.6), rgba(45, 27, 16, 0.6)), url('https://images.unsplash.com/photo-1542314831-c6a4d14d8373?auto=format&fit=crop&q=80') center/cover;
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+}
+
+.hero-title {
+    font-size: 4rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    animation: fadeInDown 1s ease-out;
+}
+
+.hero-subtitle {
+    font-size: 1.5rem;
+    font-weight: 300;
+    margin-bottom: 2rem;
+    animation: fadeInUp 1s ease-out;
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    border-radius: 50px;
+    padding: 0.75rem 2rem;
+    font-weight: 600;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(140, 74, 47, 0.3);
+}
+
+.btn-primary:hover {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    transform: translateY(-2px);
+    color: white;
+    box-shadow: 0 6px 20px rgba(45, 27, 16, 0.4);
+}
+
+.btn-outline-primary {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+.btn-outline-primary:hover {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white;
+}
+
+.btn-outline-danger {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+.btn-outline-danger:hover {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white;
+}
+
+/* Cards & Room Cards */
+.card {
+    background-color: #ffffff !important;
+    color: var(--text-dark);
+    border: 1px solid rgba(45, 27, 16, 0.1) !important;
+}
+
+.room-card {
+    border-radius: 15px;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    background: #ffffff;
+    box-shadow: 0 10px 30px rgba(45, 27, 16, 0.05);
+}
+
+.room-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(140, 74, 47, 0.15);
+}
+
+.room-img-container {
+    overflow: hidden;
+    height: 250px;
+}
+
+.room-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.room-card:hover img {
+    transform: scale(1.1);
+}
+
+.card-body {
+    padding: 2rem;
+}
+
+.room-price {
+    color: var(--primary-color);
+    font-weight: 700;
+    font-size: 1.25rem;
+}
+
+/* Icons Overrides */
+.text-secondary, .text-danger {
+    color: var(--primary-color) !important;
+}
+
+/* Animations */
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Form Styling */
+.form-control, .form-select, .input-group-text {
+    background-color: #ffffff !important;
+    color: var(--text-dark) !important;
+    border: 1px solid rgba(45, 27, 16, 0.2) !important;
+    border-radius: 10px;
+}
+
+.form-control:focus, .form-select:focus {
+    box-shadow: 0 0 0 0.25rem rgba(140, 74, 47, 0.25) !important;
+    border-color: var(--primary-color) !important;
+    background-color: #ffffff !important;
+}
+
+.form-control::placeholder {
+    color: #a09088;
+}
+
+/* Footer */
+footer {
+    background-color: var(--secondary-color);
+    color: white;
+    padding: 3rem 0;
+    margin-top: auto;
+    border-top: 4px solid var(--primary-color);
+}
