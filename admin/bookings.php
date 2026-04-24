@@ -1,6 +1,5 @@
 <?php
 require_once '../includes/db.php';
-require_once 'header.php';
 
 // Handle status updates
 if (isset($_GET['action']) && isset($_GET['id']) && is_numeric($_GET['id'])) {
@@ -26,6 +25,8 @@ if (isset($_GET['action']) && isset($_GET['id']) && is_numeric($_GET['id'])) {
         exit();
     }
 }
+
+require_once 'header.php';
 
 $sql = "SELECT b.*, u.name as user_name, u.email, u.phone, r.name as room_name 
         FROM bookings b 

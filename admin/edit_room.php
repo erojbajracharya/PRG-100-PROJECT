@@ -1,6 +1,5 @@
 <?php
 require_once '../includes/db.php';
-require_once 'header.php';
 
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
     header("Location: rooms.php");
@@ -43,6 +42,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 $room = $conn->query("SELECT * FROM rooms WHERE id = '$id'")->fetch_assoc();
+
+require_once 'header.php';
 ?>
 
 <div class="d-flex justify-content-between align-items-center mb-4">

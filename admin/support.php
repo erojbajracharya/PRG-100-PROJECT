@@ -1,6 +1,4 @@
-<?php
 require_once '../includes/db.php';
-require_once 'header.php';
 
 // Handle Resolve
 if (isset($_GET['resolve']) && is_numeric($_GET['resolve'])) {
@@ -20,6 +18,8 @@ if (isset($_GET['delete']) && is_numeric($_GET['delete'])) {
 
 $sql = "SELECT * FROM support_requests ORDER BY created_at DESC";
 $result = $conn->query($sql);
+
+require_once 'header.php';
 ?>
 
 <div class="d-flex justify-content-between align-items-center mb-4">

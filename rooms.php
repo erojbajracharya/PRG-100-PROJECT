@@ -15,7 +15,7 @@ if (!empty($type_filter)) {
 if (!empty($search)) {
     $where .= " AND name LIKE '%$search%'";
 }
-if ($max_price > 0) {
+if (isset($_GET['max_price'])) {
     $where .= " AND price <= $max_price";
 }
 if (!empty($amenities_filter)) {

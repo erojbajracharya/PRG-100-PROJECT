@@ -1,6 +1,5 @@
 <?php
 require_once '../includes/db.php';
-require_once 'header.php';
 
 $error = '';
 
@@ -35,6 +34,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $error = "Error adding room: " . $conn->error;
     }
 }
+
+require_once 'header.php';
 ?>
 
 <div class="d-flex justify-content-between align-items-center mb-4">
