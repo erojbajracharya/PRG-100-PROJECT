@@ -38,6 +38,9 @@ $baseUrl = '/PRG 100 PROJECT';
                 <li class="nav-item">
                     <a class="nav-link" href="<?php echo $baseUrl; ?>/rooms.php">Rooms</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo $baseUrl; ?>/contact.php">Contact</a>
+                </li>
                 <?php if (isset($_SESSION['user_id'])): ?>
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo $baseUrl; ?>/my_bookings.php">My Bookings</a>

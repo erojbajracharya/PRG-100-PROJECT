@@ -40,7 +40,7 @@ $result = $conn->query($sql);
                                 </div>
                                 <p class="card-text text-muted flex-grow-1"><?php echo substr(htmlspecialchars($row['description']), 0, 100) . '...'; ?></p>
                                 <div class="d-flex justify-content-between align-items-center mt-3">
-                                    <span class="room-price">$<?php echo number_format($row['price'], 2); ?> <small class="text-muted fs-6 fw-normal">/ Night</small></span>
+                                    <span class="room-price">Rs. <?php echo number_format($row['price'], 2); ?> <small class="text-muted fs-6 fw-normal">/ Night</small></span>
                                     <a href="room_details.php?id=<?php echo $row['id']; ?>" class="btn btn-outline-danger rounded-pill">View Details</a>
                                 </div>
                             </div>

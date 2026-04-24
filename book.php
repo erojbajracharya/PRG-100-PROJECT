@@ -89,13 +89,13 @@ require_once 'includes/header.php';
                                 <li><i class="fa-regular fa-calendar-check me-2 text-secondary"></i> <strong>Check-in:</strong> <?php echo date('F j, Y', strtotime($check_in)); ?></li>
                                 <li><i class="fa-regular fa-calendar-xmark me-2 text-secondary"></i> <strong>Check-out:</strong> <?php echo date('F j, Y', strtotime($check_out)); ?></li>
                                 <li><i class="fa-solid fa-moon me-2 text-secondary"></i> <strong>Duration:</strong> <?php echo $days; ?> Night(s)</li>
-                                <li><i class="fa-solid fa-tag me-2 text-secondary"></i> <strong>Price Per Night:</strong> $<?php echo number_format($room['price'], 2); ?></li>
+                                <li><i class="fa-solid fa-tag me-2 text-secondary"></i> <strong>Price Per Night:</strong> Rs. <?php echo number_format($room['price'], 2); ?></li>
                             </ul>
                         </div>
                     </div>
                     
                     <div class="bg-light p-4 rounded-3 text-center mb-4">
-                        <h4 class="mb-0 fw-bold">Total Amount: <span class="text-danger">$<?php echo number_format($total_price, 2); ?></span></h4>
+                        <h4 class="mb-0 fw-bold">Total Amount: <span class="text-danger">Rs. <?php echo number_format($total_price, 2); ?></span></h4>
                     </div>
                     
                     <form method="POST" action="">

@@ -33,7 +33,7 @@ require_once 'includes/header.php';
                         <span class="badge bg-secondary fs-6"><?php echo htmlspecialchars($room['type']); ?></span>
                     </div>
                     
-                    <h4 class="room-price mb-4">$<?php echo number_format($room['price'], 2); ?> <span class="text-muted fs-6 fw-normal">/ Night</span></h4>
+                    <h4 class="room-price mb-4">Rs. <?php echo number_format($room['price'], 2); ?> <span class="text-muted fs-6 fw-normal">/ Night</span></h4>
                     
                     <h5 class="fw-bold mb-3">Description</h5>
                     <p class="text-muted lh-lg"><?php echo nl2br(htmlspecialchars($room['description'])); ?></p>
@@ -42,12 +42,27 @@ require_once 'includes/header.php';
                     
                     <h5 class="fw-bold mb-3">Room Amenities</h5>
                     <div class="row g-3">
-                        <div class="col-md-4 col-6"><i class="fa-solid fa-wifi text-secondary me-2"></i> Free High-Speed WiFi</div>
-                        <div class="col-md-4 col-6"><i class="fa-solid fa-tv text-secondary me-2"></i> Smart TV</div>
-                        <div class="col-md-4 col-6"><i class="fa-solid fa-snowflake text-secondary me-2"></i> Air Conditioning</div>
-                        <div class="col-md-4 col-6"><i class="fa-solid fa-mug-hot text-secondary me-2"></i> Coffee Maker</div>
-                        <div class="col-md-4 col-6"><i class="fa-solid fa-hot-tub-person text-secondary me-2"></i> Hot Water</div>
-                        <div class="col-md-4 col-6"><i class="fa-solid fa-bell-concierge text-secondary me-2"></i> Room Service</div>
+                        <?php 
+                        if (!empty($room['amenities'])) {
+                            $ams = explode(',', $room['amenities']);
+                            $icons = [
+                                'Free WiFi' => 'fa-wifi',
+                                'Air Conditioning' => 'fa-snowflake',
+                                'Smart TV' => 'fa-tv',
+                                'Room Service' => 'fa-bell-concierge',
+                                'Mini Bar' => 'fa-glass-water',
+                                'Breakfast Included' => 'fa-utensils',
+                                'Swimming Pool Access' => 'fa-person-swimming',
+                                'Hot Water' => 'fa-hot-tub-person'
+                            ];
+                            foreach($ams as $am) {
+                                $icon = isset($icons[$am]) ? $icons[$am] : 'fa-check';
+                                echo "<div class='col-md-4 col-6'><i class='fa-solid $icon text-secondary me-2'></i> $am</div>";
+                            }
+                        } else {
+                            echo "<div class='col-12 text-muted'>No amenities listed.</div>";
+                        }
+                        ?>
                     </div>
                 </div>
             </div>

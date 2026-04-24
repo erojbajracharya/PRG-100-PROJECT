@@ -76,7 +76,7 @@ require_once 'includes/header.php';
                         <h5 class="fw-bold mb-2">Booking Summary</h5>
                         <p class="mb-1"><strong>Room:</strong> <?php echo htmlspecialchars($booking['room_name']); ?></p>
                         <p class="mb-1"><strong>Dates:</strong> <?php echo $booking['check_in_date']; ?> To <?php echo $booking['check_out_date']; ?></p>
-                        <h4 class="mt-3 text-center fw-bold">Total To Pay: <span class="text-danger">$<?php echo number_format($booking['total_price'], 2); ?></span></h4>
+                        <h4 class="mt-3 text-center fw-bold">Total To Pay: <span class="text-danger">Rs. <?php echo number_format($booking['total_price'], 2); ?></span></h4>
                     </div>
                     
                     <form method="POST" action="">

@@ -66,7 +66,7 @@ $recent_bookings = $conn->query("SELECT b.*, u.name as user_name, r.name as room
             <div class="d-flex justify-content-between align-items-center">
                 <div>
                     <h6 class="text-muted mb-1">Total Revenue</h6>
-                    <h3 class="fw-bold mb-0">$<?php echo number_format($stats['total_revenue'], 2); ?></h3>
+                    <h3 class="fw-bold mb-0">Rs. <?php echo number_format($stats['total_revenue'], 2); ?></h3>
                 </div>
                 <div class="bg-danger bg-opacity-10 p-3 rounded-circle text-danger">
                     <i class="fa-solid fa-dollar-sign fa-lg"></i>

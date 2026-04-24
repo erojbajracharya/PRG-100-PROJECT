@@ -41,7 +41,7 @@ $result = $conn->query("SELECT * FROM rooms ORDER BY id DESC");
                                 </td>
                                 <td class="fw-bold"><?php echo htmlspecialchars($row['name']); ?></td>
                                 <td><?php echo htmlspecialchars($row['type']); ?></td>
-                                <td>$<?php echo number_format($row['price'], 2); ?></td>
+                                <td>Rs. <?php echo number_format($row['price'], 2); ?></td>
                                 <td>
                                     <?php
                                     $sbadge = 'bg-success';

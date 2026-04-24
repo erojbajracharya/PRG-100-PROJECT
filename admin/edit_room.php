@@ -17,6 +17,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $description = $conn->real_escape_string($_POST['description']);
     $status = $conn->real_escape_string($_POST['status']);
     
+    $amenities = isset($_POST['amenities']) ? implode(',', $_POST['amenities']) : '';
+    $amenities = $conn->real_escape_string($amenities);
+    
     $update_img = "";
     if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
         $allowed = ['jpg', 'jpeg', 'png', 'gif'];
@@ -30,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
     
-    $sql = "UPDATE rooms SET name='$name', type='$type', price='$price', description='$description', status='$status' $update_img WHERE id='$id'";
+    $sql = "UPDATE rooms SET name='$name', type='$type', price='$price', description='$description', status='$status', amenities='$amenities' $update_img WHERE id='$id'";
     if ($conn->query($sql) === TRUE) {
         header("Location: rooms.php?success=Room updated successfully");
         exit();
@@ -72,7 +75,7 @@ $room = $conn->query("SELECT * FROM rooms WHERE id = '$id'")->fetch_assoc();
                     </select>
                 </div>
                 <div class="col-md-6 mb-3">
-                    <label class="form-label fw-bold">Price per Night ($)</label>
+                    <label class="form-label fw-bold">Price per Night (NPR)</label>
                     <input type="number" step="0.01" name="price" class="form-control" required value="<?php echo $room['price']; ?>">
                 </div>
                 <div class="col-md-6 mb-3">
@@ -82,6 +85,24 @@ $room = $conn->query("SELECT * FROM rooms WHERE id = '$id'")->fetch_assoc();
                         <option value="Booked" <?php if($room['status']=='Booked') echo 'selected';?>>Booked</option>
                         <option value="Maintenance" <?php if($room['status']=='Maintenance') echo 'selected';?>>Maintenance</option>
                     </select>
+                </div>
+                <div class="col-12 mb-3">
+                    <label class="form-label fw-bold">Room Amenities</label>
+                    <div class="row g-2">
+                        <?php 
+                        $all_amenities = ['Free WiFi', 'Air Conditioning', 'Smart TV', 'Room Service', 'Mini Bar', 'Breakfast Included', 'Swimming Pool Access', 'Hot Water'];
+                        $current_amenities = explode(',', $room['amenities'] ?? '');
+                        foreach($all_amenities as $am): ?>
+                        <div class="col-md-3 col-6">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="amenities[]" value="<?php echo $am; ?>" id="am_<?php echo str_replace(' ', '', $am); ?>" <?php echo in_array($am, $current_amenities) ? 'checked' : ''; ?>>
+                                <label class="form-check-label" for="am_<?php echo str_replace(' ', '', $am); ?>">
+                                    <?php echo $am; ?>
+                                </label>
+                            </div>
+                        </div>
+                        <?php endforeach; ?>
+                    </div>
                 </div>
                 <div class="col-12 mb-3">
                     <label class="form-label fw-bold">Room Image (Leave empty to keep current)</label>

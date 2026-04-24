@@ -42,6 +42,7 @@ $tables = [
         image VARCHAR(255),
         status ENUM('Available', 'Booked', 'Maintenance') DEFAULT 'Available',
         description TEXT,
+        amenities TEXT DEFAULT NULL,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )",
     "bookings" => "CREATE TABLE IF NOT EXISTS bookings (
@@ -65,8 +66,26 @@ $tables = [
         transaction_id VARCHAR(100),
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY (booking_id) REFERENCES bookings(id) ON DELETE CASCADE
+    )",
+    "support_requests" => "CREATE TABLE IF NOT EXISTS support_requests (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        user_id INT NULL,
+        name VARCHAR(255) NOT NULL,
+        email VARCHAR(255) NOT NULL,
+        subject VARCHAR(255) NOT NULL,
+        message TEXT NOT NULL,
+        image VARCHAR(255) DEFAULT NULL,
+        status ENUM('Pending', 'Resolved') DEFAULT 'Pending',
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL
     )"
 ];
+
+// Check if amenities column exists, if not add it
+$check_column = $conn->query("SHOW COLUMNS FROM rooms LIKE 'amenities'");
+if ($check_column->num_rows == 0) {
+    $conn->query("ALTER TABLE rooms ADD COLUMN amenities TEXT DEFAULT NULL AFTER description");
+}
 
 foreach ($tables as $name => $sql) {
     if ($conn->query($sql) === TRUE) {

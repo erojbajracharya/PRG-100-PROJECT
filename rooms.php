@@ -6,12 +6,23 @@ require_once 'includes/header.php';
 $where = "WHERE status = 'Available'";
 $type_filter = isset($_GET['type']) ? $conn->real_escape_string($_GET['type']) : '';
 $search = isset($_GET['search']) ? $conn->real_escape_string($_GET['search']) : '';
+$max_price = isset($_GET['max_price']) ? (int)$_GET['max_price'] : 100000;
+$amenities_filter = isset($_GET['amenities']) ? $_GET['amenities'] : [];
 
 if (!empty($type_filter)) {
     $where .= " AND type = '$type_filter'";
 }
 if (!empty($search)) {
     $where .= " AND name LIKE '%$search%'";
+}
+if ($max_price > 0) {
+    $where .= " AND price <= $max_price";
+}
+if (!empty($amenities_filter)) {
+    foreach($amenities_filter as $am) {
+        $am_safe = $conn->real_escape_string($am);
+        $where .= " AND amenities LIKE '%$am_safe%'";
+    }
 }
 
 $sql = "SELECT * FROM rooms $where ORDER BY id DESC";
@@ -31,15 +42,17 @@ $type_result = $conn->query($type_sql);
     <div class="card shadow-sm border-0 mb-5" style="border-radius: 15px;">
         <div class="card-body p-4">
             <form method="GET" action="" class="row g-3">
-                <div class="col-md-5">
+                <div class="col-md-4">
+                    <label class="form-label fw-bold">Search</label>
                     <div class="input-group">
                         <span class="input-group-text bg-white border-end-0"><i class="fa-solid fa-magnifying-glass text-muted"></i></span>
-                        <input type="text" name="search" class="form-control border-start-0 ps-0" placeholder="Search By Room Name..." value="<?php echo htmlspecialchars($search); ?>">
+                        <input type="text" name="search" class="form-control border-start-0 ps-0" placeholder="Room Name..." value="<?php echo htmlspecialchars($search); ?>">
                     </div>
                 </div>
-                <div class="col-md-5">
+                <div class="col-md-4">
+                    <label class="form-label fw-bold">Room Type</label>
                     <select name="type" class="form-select">
-                        <option value="">All Room Types</option>
+                        <option value="">All Types</option>
                         <?php if($type_result && $type_result->num_rows > 0): ?>
                             <?php while($t = $type_result->fetch_assoc()): ?>
                                 <option value="<?php echo htmlspecialchars($t['type']); ?>" <?php echo ($type_filter == $t['type']) ? 'selected' : ''; ?>>
@@ -49,8 +62,32 @@ $type_result = $conn->query($type_sql);
                         <?php endif; ?>
                     </select>
                 </div>
-                <div class="col-md-2 d-grid">
-                    <button type="submit" class="btn btn-primary rounded-pill">Search</button>
+                <div class="col-md-4">
+                    <label class="form-label fw-bold">Max Price: Rs. <span id="priceValue"><?php echo number_format($max_price); ?></span></label>
+                    <input type="range" name="max_price" class="form-range" min="0" max="100000" step="1000" value="<?php echo $max_price; ?>" oninput="document.getElementById('priceValue').innerText = Number(this.value).toLocaleString()">
+                </div>
+                
+                <div class="col-12 mt-3">
+                    <label class="form-label fw-bold mb-2">Amenities</label>
+                    <div class="row g-2">
+                        <?php 
+                        $all_amenities = ['Free WiFi', 'Air Conditioning', 'Smart TV', 'Room Service', 'Mini Bar', 'Breakfast Included', 'Swimming Pool Access', 'Hot Water'];
+                        foreach($all_amenities as $am): ?>
+                        <div class="col-md-3 col-6">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="amenities[]" value="<?php echo $am; ?>" id="filter_<?php echo str_replace(' ', '', $am); ?>" <?php echo in_array($am, $amenities_filter) ? 'checked' : ''; ?>>
+                                <label class="form-check-label small" for="filter_<?php echo str_replace(' ', '', $am); ?>">
+                                    <?php echo $am; ?>
+                                </label>
+                            </div>
+                        </div>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+
+                <div class="col-12 text-center mt-4">
+                    <button type="submit" class="btn btn-primary rounded-pill px-5">Apply Filters</button>
+                    <a href="rooms.php" class="btn btn-outline-secondary rounded-pill px-4 ms-2">Reset</a>
                 </div>
             </form>
         </div>
@@ -75,7 +112,7 @@ $type_result = $conn->query($type_sql);
                             </div>
                             <p class="card-text text-muted flex-grow-1"><?php echo substr(htmlspecialchars($row['description']), 0, 100) . '...'; ?></p>
                             <div class="d-flex justify-content-between align-items-center mt-3">
-                                <span class="room-price">$<?php echo number_format($row['price'], 2); ?> <small class="text-muted fs-6 fw-normal">/ Night</small></span>
+                                <span class="room-price">Rs. <?php echo number_format($row['price'], 2); ?> <small class="text-muted fs-6 fw-normal">/ Night</small></span>
                                 <a href="room_details.php?id=<?php echo $row['id']; ?>" class="btn btn-outline-danger rounded-pill">View Details</a>
                             </div>
                         </div>

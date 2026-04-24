@@ -39,7 +39,7 @@ $result = $conn->query($sql);
                                 <td class="fw-bold">#<?php echo $row['booking_id']; ?></td>
                                 <td><?php echo htmlspecialchars($row['user_name']); ?></td>
                                 <td><?php echo htmlspecialchars($row['room_name']); ?></td>
-                                <td class="text-success fw-bold">$<?php echo number_format($row['amount'], 2); ?></td>
+                                <td class="text-success fw-bold">Rs. <?php echo number_format($row['amount'], 2); ?></td>
                                 <td>
                                     <?php
                                         $icon = 'fa-credit-card';

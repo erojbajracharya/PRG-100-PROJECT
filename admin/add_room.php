@@ -11,6 +11,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $description = $conn->real_escape_string($_POST['description']);
     $status = $conn->real_escape_string($_POST['status']);
     
+    $amenities = isset($_POST['amenities']) ? implode(',', $_POST['amenities']) : '';
+    $amenities = $conn->real_escape_string($amenities);
+    
     $image = '';
     if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
         $allowed = ['jpg', 'jpeg', 'png', 'gif'];
@@ -24,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
     
-    $sql = "INSERT INTO rooms (name, type, price, description, status, image) VALUES ('$name', '$type', '$price', '$description', '$status', '$image')";
+    $sql = "INSERT INTO rooms (name, type, price, description, status, image, amenities) VALUES ('$name', '$type', '$price', '$description', '$status', '$image', '$amenities')";
     if ($conn->query($sql) === TRUE) {
         header("Location: rooms.php?success=Room added successfully");
         exit();
@@ -62,8 +65,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </select>
                 </div>
                 <div class="col-md-6 mb-3">
-                    <label class="form-label fw-bold">Price per Night ($)</label>
-                    <input type="number" step="0.01" name="price" class="form-control" required placeholder="e.g. 150.00">
+                    <label class="form-label fw-bold">Price per Night (NPR)</label>
+                    <input type="number" step="0.01" name="price" class="form-control" required placeholder="e.g. 5000">
                 </div>
                 <div class="col-md-6 mb-3">
                     <label class="form-label fw-bold">Status</label>
@@ -73,12 +76,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </select>
                 </div>
                 <div class="col-12 mb-3">
+                    <label class="form-label fw-bold">Room Amenities</label>
+                    <div class="row g-2">
+                        <?php 
+                        $all_amenities = ['Free WiFi', 'Air Conditioning', 'Smart TV', 'Room Service', 'Mini Bar', 'Breakfast Included', 'Swimming Pool Access', 'Hot Water'];
+                        foreach($all_amenities as $am): ?>
+                        <div class="col-md-3 col-6">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="amenities[]" value="<?php echo $am; ?>" id="am_<?php echo str_replace(' ', '', $am); ?>">
+                                <label class="form-check-label" for="am_<?php echo str_replace(' ', '', $am); ?>">
+                                    <?php echo $am; ?>
+                                </label>
+                            </div>
+                        </div>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+                <div class="col-12 mb-3">
                     <label class="form-label fw-bold">Room Image</label>
                     <input type="file" name="image" class="form-control" accept="image/*">
                 </div>
                 <div class="col-12 mb-4">
                     <label class="form-label fw-bold">Description</label>
-                    <textarea name="description" class="form-control" rows="4" placeholder="Enter room description and amenities..."></textarea>
+                    <textarea name="description" class="form-control" rows="4" placeholder="Enter room description..."></textarea>
                 </div>
                 <div class="col-12">
                     <button type="submit" class="btn btn-primary"><i class="fa-solid fa-save me-2"></i>Save Room</button>

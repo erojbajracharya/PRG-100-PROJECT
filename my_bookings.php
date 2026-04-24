@@ -88,7 +88,7 @@ require_once 'includes/header.php';
                                     </td>
                                     <td class="py-3"><?php echo $row['check_in_date']; ?></td>
                                     <td class="py-3"><?php echo $row['check_out_date']; ?></td>
-                                    <td class="py-3">$<?php echo number_format($row['total_price'], 2); ?></td>
+                                    <td class="py-3">Rs. <?php echo number_format($row['total_price'], 2); ?></td>
                                     <td class="py-3">
                                         <?php 
                                         $badge_class = 'bg-secondary';

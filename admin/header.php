@@ -235,6 +235,10 @@ $baseUrl = '/PRG 100 PROJECT';
                     <a class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'payments.php' ? 'active' : ''; ?>"
                         href="payments.php"><i class="fa-solid fa-file-invoice-dollar"></i> Payments</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'support.php' ? 'active' : ''; ?>"
+                        href="support.php"><i class="fa-solid fa-headset"></i> Support Requests</a>
+                </li>
                 <li class="nav-item mt-5">
                     <a class="nav-link text-danger" href="logout.php"><i class="fa-solid fa-right-from-bracket"></i>
                         Logout Admin</a>
