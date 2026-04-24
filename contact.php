@@ -25,20 +25,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $ext = pathinfo($filename, PATHINFO_EXTENSION);
         if (in_array(strtolower($ext), $allowed)) {
             $new_name = uniqid() . '.' . $ext;
-            if (move_uploaded_file($_FILES['image']['tmp_name'], 'uploads/support/' . $new_name)) {
+            $upload_path = __DIR__ . '/uploads/support/' . $new_name;
+            if (move_uploaded_file($_FILES['image']['tmp_name'], $upload_path)) {
                 $image = $new_name;
+            } else {
+                $error = "Failed to move uploaded file.";
             }
+        } else {
+            $error = "Invalid file type. Only JPG, JPEG, PNG, and GIF are allowed.";
         }
+    } elseif (isset($_FILES['image']) && $_FILES['image']['error'] != 4) {
+        $error = "Image upload error code: " . $_FILES['image']['error'];
     }
     
-    $sql = "INSERT INTO support_requests (user_id, name, email, subject, message, image) 
-            VALUES ($user_id, '$name', '$email', '$subject', '$message', '$image')";
-            
-    if ($conn->query($sql) === TRUE) {
-        header("Location: contact.php?success=1");
-        exit();
-    } else {
-        $error = "Error sending request: " . $conn->error;
+    if (empty($error)) {
+        $sql = "INSERT INTO support_requests (user_id, name, email, subject, message, image) 
+                VALUES ($user_id, '$name', '$email', '$subject', '$message', '$image')";
+                
+        if ($conn->query($sql) === TRUE) {
+            header("Location: contact.php?success=1");
+            exit();
+        } else {
+            $error = "Error sending request: " . $conn->error;
+        }
     }
 }
 
