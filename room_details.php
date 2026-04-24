@@ -24,7 +24,7 @@ require_once 'includes/header.php';
         <div class="col-lg-8 mb-4 mb-lg-0">
             <div class="card border-0 shadow-sm" style="border-radius: 15px; overflow: hidden;">
                 <?php
-                $img = !empty($room['image']) ? "uploads/rooms/" . htmlspecialchars($room['image']) : "https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&q=80";
+                $img = !empty($room['image']) ? ROOM_IMG_PATH . htmlspecialchars($room['image']) : "https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&q=80";
                 ?>
                 <img src="<?php echo $img; ?>" class="img-fluid w-100" style="height: 500px; object-fit: cover;" alt="<?php echo htmlspecialchars($room['name']); ?>">
                 <div class="card-body p-4">

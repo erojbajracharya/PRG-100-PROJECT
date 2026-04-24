@@ -101,7 +101,7 @@ $type_result = $conn->query($type_sql);
                     <div class="card room-card h-100">
                         <div class="room-img-container">
                             <?php
-                            $img = !empty($row['image']) ? "uploads/rooms/" . htmlspecialchars($row['image']) : "https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&q=80";
+                            $img = !empty($row['image']) ? ROOM_IMG_PATH . htmlspecialchars($row['image']) : "https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&q=80";
                             ?>
                             <img src="<?php echo $img; ?>" alt="<?php echo htmlspecialchars($row['name']); ?>">
                         </div>

@@ -1,9 +1,6 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-// Get base URL dynamically
-$baseUrl = '/PRG-100-PROJECT';
+// BASE_URL is already defined in db.php which is included before header.php
+$baseUrl = BASE_URL;
 ?>
 <!DOCTYPE html>
 <html lang="en">

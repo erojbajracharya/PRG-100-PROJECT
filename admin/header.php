@@ -6,8 +6,8 @@ if (!isset($_SESSION['admin_id']) && basename($_SERVER['PHP_SELF']) != 'login.ph
     header("Location: login.php");
     exit();
 }
-// Get base URL dynamically
-$baseUrl = '/PRG-100-PROJECT';
+// Get base URL dynamically from the constant defined in db.php
+$baseUrl = BASE_URL;
 ?>
 <!DOCTYPE html>
 <html lang="en">

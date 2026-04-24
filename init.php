@@ -1,7 +1,11 @@
 <?php
+// We don't require db.php here because db.php redirects to init.php if database doesn't exist.
+// But we can define the connection parameters here or try to include a simplified version.
+
 $servername = "localhost";
 $username = "root";
 $password = "";
+$dbname = "hotel_ead_db";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password);
@@ -9,15 +13,17 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+echo "<h3>Hotel EAD System Initialization</h3>";
+
 // Create database
-$sql = "CREATE DATABASE IF NOT EXISTS hotel_ead_db";
+$sql = "CREATE DATABASE IF NOT EXISTS $dbname";
 if ($conn->query($sql) === TRUE) {
-    echo "Database created successfully<br>";
+    echo "<span style='color: green;'>✓ Database '$dbname' created or already exists.</span><br>";
 } else {
-    echo "Error creating database: " . $conn->error . "<br>";
+    die("<span style='color: red;'>✗ Error creating database: " . $conn->error . "</span><br>");
 }
 
-$conn->select_db("hotel_ead_db");
+$conn->select_db($dbname);
 
 // SQL to create tables
 $tables = [
@@ -81,27 +87,32 @@ $tables = [
     )"
 ];
 
-// Check if amenities column exists, if not add it
+foreach ($tables as $name => $sql) {
+    if ($conn->query($sql) === TRUE) {
+        echo "<span style='color: green;'>✓ Table '$name' ready.</span><br>";
+    } else {
+        echo "<span style='color: red;'>✗ Error creating table '$name': " . $conn->error . "</span><br>";
+    }
+}
+
+// Check if amenities column exists (for backward compatibility if script is rerun)
 $check_column = $conn->query("SHOW COLUMNS FROM rooms LIKE 'amenities'");
 if ($check_column->num_rows == 0) {
     $conn->query("ALTER TABLE rooms ADD COLUMN amenities TEXT DEFAULT NULL AFTER description");
 }
 
-foreach ($tables as $name => $sql) {
-    if ($conn->query($sql) === TRUE) {
-        echo "Table $name created successfully<br>";
+// Insert default admin if not exists
+$admin_pass = password_hash('@Admin123#EAD', PASSWORD_DEFAULT);
+$admin_sql = "INSERT IGNORE INTO admin (id, username, password) VALUES (1, 'admin', '$admin_pass')";
+if ($conn->query($admin_sql) === TRUE) {
+    if ($conn->affected_rows > 0) {
+        echo "<span style='color: blue;'>i Default Admin User Created (admin / @Admin123#EAD)</span><br>";
     } else {
-        echo "Error creating table $name: " . $conn->error . "<br>";
+        echo "<span style='color: blue;'>i Admin user already exists.</span><br>";
     }
 }
 
-// Insert or update default admin
-$admin_pass = password_hash('@Admin123#EAD', PASSWORD_DEFAULT);
-$admin_sql = "REPLACE INTO admin (id, username, password) VALUES (1, 'admin', '$admin_pass')";
-if ($conn->query($admin_sql) === TRUE) {
-    echo "Default Admin User Updated (admin / @Admin123#EAD)<br>";
-}
-
 $conn->close();
-echo "<br>Initialization complete. Go to <a href='index.php'>Home Page</a>.";
+echo "<br><strong>Initialization complete.</strong><br><br>";
+echo "<a href='index.php' style='padding: 10px 20px; background: #8C4A2F; color: white; text-decoration: none; border-radius: 5px;'>Go to Home Page</a>";
 ?>

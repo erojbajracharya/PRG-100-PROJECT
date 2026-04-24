@@ -36,7 +36,7 @@ $result = $conn->query("SELECT * FROM rooms ORDER BY id DESC");
                         <?php while($row = $result->fetch_assoc()): ?>
                             <tr>
                                 <td class="px-4 py-3">
-                                    <?php $img = !empty($row['image']) ? "../uploads/rooms/" . htmlspecialchars($row['image']) : "https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&q=80&w=100"; ?>
+                                    <?php $img = !empty($row['image']) ? ROOM_IMG_PATH . htmlspecialchars($row['image']) : "https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&q=80&w=100"; ?>
                                     <img src="<?php echo $img; ?>" alt="Room" class="rounded" style="width: 60px; height: 40px; object-fit: cover;">
                                 </td>
                                 <td class="fw-bold"><?php echo htmlspecialchars($row['name']); ?></td>
