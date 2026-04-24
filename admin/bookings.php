@@ -54,7 +54,7 @@ $result = $conn->query($sql);
                 <thead class="bg-light">
                     <tr>
                         <th class="px-4 py-3">ID</th>
-                        <th class="py-3">Guest Details</th>
+                        <th class="py-3">Guest details</th>
                         <th class="py-3">Room</th>
                         <th class="py-3">Dates</th>
                         <th class="py-3">Status</th>
@@ -93,21 +93,21 @@ $result = $conn->query($sql);
                                         </button>
                                         <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0">
                                             <?php if($row['status'] == 'Pending'): ?>
-                                                <li><a class="dropdown-item text-success" href="?action=confirm&id=<?php echo $row['id']; ?>">Confirm Booking</a></li>
-                                                <li><a class="dropdown-item text-danger" href="?action=cancel&id=<?php echo $row['id']; ?>">Cancel Booking</a></li>
+                                                <li><a class="dropdown-item text-success" href="?action=confirm&id=<?php echo $row['id']; ?>">Confirm booking</a></li>
+                                                <li><a class="dropdown-item text-danger" href="?action=cancel&id=<?php echo $row['id']; ?>">Cancel booking</a></li>
                                             <?php endif; ?>
                                             
                                             <?php if($row['status'] == 'Confirmed'): ?>
-                                                <li><a class="dropdown-item text-success" href="?action=checkin&id=<?php echo $row['id']; ?>">Mark Checked-In</a></li>
-                                                <li><a class="dropdown-item text-danger" href="?action=cancel&id=<?php echo $row['id']; ?>">Cancel Booking</a></li>
+                                                <li><a class="dropdown-item text-success" href="?action=checkin&id=<?php echo $row['id']; ?>">Mark checked-in</a></li>
+                                                <li><a class="dropdown-item text-danger" href="?action=cancel&id=<?php echo $row['id']; ?>">Cancel booking</a></li>
                                             <?php endif; ?>
                                             
                                             <?php if($row['status'] == 'Checked-in'): ?>
-                                                <li><a class="dropdown-item text-secondary" href="?action=checkout&id=<?php echo $row['id']; ?>">Mark Checked-Out</a></li>
+                                                <li><a class="dropdown-item text-secondary" href="?action=checkout&id=<?php echo $row['id']; ?>">Mark checked-out</a></li>
                                             <?php endif; ?>
                                             
                                             <?php if($row['status'] == 'Checked-out' || $row['status'] == 'Cancelled'): ?>
-                                                <li><span class="dropdown-item text-muted disabled">No Actions Available</span></li>
+                                                <li><span class="dropdown-item text-muted disabled">No actions available</span></li>
                                             <?php endif; ?>
                                         </ul>
                                     </div>
@@ -115,7 +115,7 @@ $result = $conn->query($sql);
                             </tr>
                         <?php endwhile; ?>
                     <?php else: ?>
-                        <tr><td colspan="6" class="text-center py-4">No Bookings Found.</td></tr>
+                        <tr><td colspan="6" class="text-center py-4">No bookings found.</td></tr>
                     <?php endif; ?>
                 </tbody>
             </table>

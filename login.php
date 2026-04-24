@@ -48,7 +48,7 @@ require_once 'includes/header.php';
                 <div class="card-body p-5">
                     <div class="text-center mb-4">
                         <h2 class="fw-bold" style="color: var(--primary-color);">Welcome Back</h2>
-                        <p class="text-muted">Login To Manage Your Bookings</p>
+                        <p class="text-muted">Login to manage your bookings</p>
                     </div>
                     
                     <?php if(!empty($error)): ?>
@@ -60,7 +60,7 @@ require_once 'includes/header.php';
                             <label class="form-label fw-bold">Email Address</label>
                             <div class="input-group">
                                 <span class="input-group-text bg-white border-end-0"><i class="fa-solid fa-envelope text-muted"></i></span>
-                                <input type="email" name="email" class="form-control border-start-0 ps-2" required placeholder="name@example.com">
+                                <input type="email" name="email" class="form-control border-start-0 ps-2" required placeholder="name@example.com" value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>">
                             </div>
                         </div>
                         <div class="mb-4">
@@ -74,8 +74,7 @@ require_once 'includes/header.php';
                             <button type="submit" class="btn btn-primary btn-lg rounded-pill">Login</button>
                         </div>
                         <div class="text-center mt-4">
-                            <p class="text-muted mb-2">Don't Have an Account? <a href="register.php" class="text-decoration-none fw-bold" style="color: var(--secondary-color);">Register Here</a></p>
-                            <a href="admin/login.php" class="text-decoration-none text-muted small"><i class="fa-solid fa-shield-halved me-1"></i> Admin Login</a>
+                            <p class="text-muted mb-0">Don't have an account? <a href="register.php" class="text-decoration-none fw-bold" style="color: var(--secondary-color);">Register here</a></p>
                         </div>
                     </form>
                 </div>

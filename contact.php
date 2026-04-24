@@ -1,9 +1,12 @@
 <?php
 require_once 'includes/db.php';
-require_once 'includes/header.php';
 
 $success = '';
 $error = '';
+
+if (isset($_GET['success'])) {
+    $success = "Your support request has been sent successfully. We will get back to you soon.";
+}
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $name = $conn->real_escape_string($_POST['name']);
@@ -29,19 +32,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             VALUES ($user_id, '$name', '$email', '$subject', '$message', '$image')";
             
     if ($conn->query($sql) === TRUE) {
-        $success = "Your Support Request Has Been Sent Successfully. We Will Get Back To You Soon.";
+        header("Location: contact.php?success=1");
+        exit();
     } else {
-        $error = "Error Sending Request: " . $conn->error;
+        $error = "Error sending request: " . $conn->error;
     }
 }
+
+require_once 'includes/header.php';
 ?>
 
 <div class="container py-5 mt-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="text-center mb-5">
-                <h1 class="fw-bold" style="color: var(--primary-color);">Contact Us / Support</h1>
-                <p class="text-muted">Have A Question Or Need Help? Send Us A Message!</p>
+                <h1 class="fw-bold" style="color: var(--primary-color);">Contact us / Support</h1>
+                <p class="text-muted">Have a question or need help? Send us a message!</p>
             </div>
 
             <?php if(!empty($success)): ?>
@@ -58,19 +64,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label class="form-label fw-bold">Your Name</label>
-                                <input type="text" name="name" class="form-control" required placeholder="Enter Your Full Name" value="<?php echo isset($_SESSION['user_name']) ? $_SESSION['user_name'] : ''; ?>">
+                                <input type="text" name="name" class="form-control" required placeholder="Enter your full name" value="<?php echo isset($_POST['name']) ? htmlspecialchars($_POST['name']) : (isset($_SESSION['user_name']) ? $_SESSION['user_name'] : ''); ?>">
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label class="form-label fw-bold">Email Address</label>
-                                <input type="email" name="email" class="form-control" required placeholder="Enter Your Email">
+                                <input type="email" name="email" class="form-control" required placeholder="Enter your email" value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>">
                             </div>
                             <div class="col-12 mb-3">
                                 <label class="form-label fw-bold">Subject</label>
-                                <input type="text" name="subject" class="form-control" required placeholder="What Is This About?">
+                                <input type="text" name="subject" class="form-control" required placeholder="What is this about?" value="<?php echo isset($_POST['subject']) ? htmlspecialchars($_POST['subject']) : ''; ?>">
                             </div>
                             <div class="col-12 mb-3">
                                 <label class="form-label fw-bold">Message</label>
-                                <textarea name="message" class="form-control" rows="5" required placeholder="Describe Your Issue Or Inquiry..."></textarea>
+                                <textarea name="message" class="form-control" rows="5" required placeholder="Describe your issue or inquiry..."><?php echo isset($_POST['message']) ? htmlspecialchars($_POST['message']) : ''; ?></textarea>
                             </div>
                             <div class="col-12 mb-4">
                                 <label class="form-label fw-bold">Upload Image (Optional)</label>

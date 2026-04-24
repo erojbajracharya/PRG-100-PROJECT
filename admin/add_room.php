@@ -10,7 +10,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $description = $conn->real_escape_string($_POST['description']);
     $status = $conn->real_escape_string($_POST['status']);
     
-    $amenities = isset($_POST['amenities']) ? implode(',', $_POST['amenities']) : '';
+    $selected_amenities = isset($_POST['amenities']) ? $_POST['amenities'] : [];
+    $other_amenities = isset($_POST['other_amenities']) ? trim($_POST['other_amenities']) : '';
+    
+    if (!empty($other_amenities)) {
+        $others_array = array_map('trim', explode(',', $other_amenities));
+        $selected_amenities = array_merge($selected_amenities, $others_array);
+    }
+    
+    $amenities = implode(',', array_filter($selected_amenities));
     $amenities = $conn->real_escape_string($amenities);
     
     $image = '';
@@ -40,7 +48,7 @@ require_once 'header.php';
 
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h3 class="fw-bold mb-0">Add New Room</h3>
-    <a href="rooms.php" class="btn btn-outline-secondary"><i class="fa-solid fa-arrow-left me-2"></i>Back to Rooms</a>
+    <a href="rooms.php" class="btn btn-outline-secondary"><i class="fa-solid fa-arrow-left me-2"></i>Back to rooms</a>
 </div>
 
 <div class="card shadow-sm">
@@ -91,6 +99,10 @@ require_once 'header.php';
                             </div>
                         </div>
                         <?php endforeach; ?>
+                    </div>
+                    <div class="mt-3">
+                        <label class="form-label small fw-bold">Other amenities (separate with commas)</label>
+                        <input type="text" name="other_amenities" class="form-control form-control-sm" placeholder="e.g. Balcony, Mountain View, Bathtub">
                     </div>
                 </div>
                 <div class="col-12 mb-3">

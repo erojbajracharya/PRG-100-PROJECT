@@ -7,7 +7,7 @@ $result = $conn->query("SELECT * FROM rooms ORDER BY id DESC");
 
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h3 class="fw-bold mb-0">Manage Rooms</h3>
-    <a href="add_room.php" class="btn btn-primary"><i class="fa-solid fa-plus me-2"></i>Add New Room</a>
+    <a href="add_room.php" class="btn btn-primary"><i class="fa-solid fa-plus me-2"></i>Add new room</a>
 </div>
 
 <?php if(isset($_GET['success'])): ?>
@@ -24,7 +24,7 @@ $result = $conn->query("SELECT * FROM rooms ORDER BY id DESC");
                 <thead class="bg-light">
                     <tr>
                         <th class="px-4 py-3">Image</th>
-                        <th class="py-3">Room Name</th>
+                        <th class="py-3">Room name</th>
                         <th class="py-3">Type</th>
                         <th class="py-3">Price</th>
                         <th class="py-3">Status</th>
@@ -52,12 +52,12 @@ $result = $conn->query("SELECT * FROM rooms ORDER BY id DESC");
                                 </td>
                                 <td class="px-4 py-3 text-end">
                                     <a href="edit_room.php?id=<?php echo $row['id']; ?>" class="btn btn-sm btn-outline-primary"><i class="fa-solid fa-pen"></i></a>
-                                    <a href="delete_room.php?id=<?php echo $row['id']; ?>" class="btn btn-sm btn-outline-danger" onclick="return confirm('Are You Sure You Want To Delete This Room?');"><i class="fa-solid fa-trash"></i></a>
+                                    <a href="delete_room.php?id=<?php echo $row['id']; ?>" class="btn btn-sm btn-outline-danger" onclick="return confirm('Are you sure you want to delete this room?');"><i class="fa-solid fa-trash"></i></a>
                                 </td>
                             </tr>
                         <?php endwhile; ?>
                     <?php else: ?>
-                        <tr><td colspan="6" class="text-center py-4">No Rooms Added Yet.</td></tr>
+                        <tr><td colspan="6" class="text-center py-4">No rooms added yet.</td></tr>
                     <?php endif; ?>
                 </tbody>
             </table>

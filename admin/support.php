@@ -1,3 +1,4 @@
+<?php
 require_once '../includes/db.php';
 
 // Handle Resolve
@@ -57,19 +58,21 @@ require_once 'header.php';
                                     <strong><?php echo htmlspecialchars($row['name']); ?></strong><br>
                                     <small class="text-muted"><?php echo htmlspecialchars($row['email']); ?></small>
                                 </td>
-                                <td><?php echo htmlspecialchars($row['subject']); ?></td>
                                 <td>
-                                    <div style="max-width: 300px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="<?php echo htmlspecialchars($row['message']); ?>">
+                                    <div style="max-width: 150px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                        <?php echo htmlspecialchars($row['subject']); ?>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div style="max-width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                                         <?php echo htmlspecialchars($row['message']); ?>
                                     </div>
                                 </td>
                                 <td>
                                     <?php if(!empty($row['image'])): ?>
-                                        <a href="../uploads/support/<?php echo $row['image']; ?>" target="_blank">
-                                            <img src="../uploads/support/<?php echo $row['image']; ?>" class="rounded" style="width: 50px; height: 50px; object-fit: cover;">
-                                        </a>
+                                        <i class="fa-solid fa-image text-primary"></i>
                                     <?php else: ?>
-                                        <span class="text-muted">None</span>
+                                        <span class="text-muted small">None</span>
                                     <?php endif; ?>
                                 </td>
                                 <td>
@@ -77,16 +80,42 @@ require_once 'header.php';
                                         <?php echo $row['status']; ?>
                                     </span>
                                 </td>
-                                <td class="px-4 py-3 text-end">
+                                <td class="px-4 py-3 text-end" style="white-space: nowrap; width: 180px;">
+                                    <button class="btn btn-sm btn-outline-primary me-1" type="button" data-bs-toggle="collapse" data-bs-target="#details_<?php echo $row['id']; ?>" aria-expanded="false">
+                                        <i class="fa-solid fa-eye me-1"></i>View details
+                                    </button>
                                     <?php if($row['status'] == 'Pending'): ?>
                                         <a href="support.php?resolve=<?php echo $row['id']; ?>" class="btn btn-sm btn-outline-success" title="Mark as Resolved"><i class="fa-solid fa-check"></i></a>
                                     <?php endif; ?>
-                                    <a href="support.php?delete=<?php echo $row['id']; ?>" class="btn btn-sm btn-outline-danger" onclick="return confirm('Are You Sure You Want To Delete This Request?');"><i class="fa-solid fa-trash"></i></a>
+                                    <a href="support.php?delete=<?php echo $row['id']; ?>" class="btn btn-sm btn-outline-danger" onclick="return confirm('Are you sure you want to delete this request?');"><i class="fa-solid fa-trash"></i></a>
+                                </td>
+                            </tr>
+                            <tr class="collapse" id="details_<?php echo $row['id']; ?>">
+                                <td colspan="7" class="bg-light px-4 py-4">
+                                    <div class="row">
+                                        <div class="<?php echo !empty($row['image']) ? 'col-md-8' : 'col-12'; ?>">
+                                            <div class="mb-3 pb-3 border-bottom">
+                                                <h6 class="fw-bold text-secondary mb-1">Subject:</h6>
+                                                <h5 class="fw-bold text-dark mb-0" style="word-break: break-word;"><?php echo htmlspecialchars($row['subject']); ?></h5>
+                                            </div>
+                                            <h6 class="fw-bold mb-2 text-secondary">Full Message:</h6>
+                                            <p class="text-dark mb-0" style="white-space: pre-wrap; line-height: 1.6; word-break: break-word;"><?php echo htmlspecialchars($row['message']); ?></p>
+                                        </div>
+                                        <?php if(!empty($row['image'])): ?>
+                                            <div class="col-md-4 text-center mt-3 mt-md-0">
+                                                <h6 class="fw-bold mb-3 text-secondary">Uploaded Image:</h6>
+                                                <a href="../uploads/support/<?php echo $row['image']; ?>" target="_blank">
+                                                    <img src="../uploads/support/<?php echo $row['image']; ?>" class="img-fluid rounded shadow-sm" style="max-height: 300px; object-fit: contain; border: 1px solid #ddd;">
+                                                </a>
+                                                <div class="mt-2 small text-muted">Click image to view full size</div>
+                                            </div>
+                                        <?php endif; ?>
+                                    </div>
                                 </td>
                             </tr>
                         <?php endwhile; ?>
                     <?php else: ?>
-                        <tr><td colspan="7" class="text-center py-4">No Support Requests Found.</td></tr>
+                        <tr><td colspan="7" class="text-center py-4">No support requests found.</td></tr>
                     <?php endif; ?>
                 </tbody>
             </table>

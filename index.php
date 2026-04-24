@@ -11,7 +11,7 @@ $result = $conn->query($sql);
 <section class="hero-section mt-5 pt-5">
     <div class="container">
         <h1 class="hero-title">Welcome to Hotel EAD</h1>
-        <a href="rooms.php" class="btn btn-primary btn-lg mt-3">Book Your Stay Now</a>
+        <a href="rooms.php" class="btn btn-primary btn-lg mt-3">Book your stay now</a>
     </div>
 </section>
 
@@ -40,8 +40,8 @@ $result = $conn->query($sql);
                                 </div>
                                 <p class="card-text text-muted flex-grow-1"><?php echo substr(htmlspecialchars($row['description']), 0, 100) . '...'; ?></p>
                                 <div class="d-flex justify-content-between align-items-center mt-3">
-                                    <span class="room-price">Rs. <?php echo number_format($row['price'], 2); ?> <small class="text-muted fs-6 fw-normal">/ Night</small></span>
-                                    <a href="room_details.php?id=<?php echo $row['id']; ?>" class="btn btn-outline-danger rounded-pill">View Details</a>
+                                    <span class="room-price">Rs. <?php echo number_format($row['price'], 2); ?> <small class="text-muted fs-6 fw-normal">/ night</small></span>
+                                    <a href="room_details.php?id=<?php echo $row['id']; ?>" class="btn btn-outline-danger rounded-pill">View details</a>
                                 </div>
                             </div>
                         </div>
@@ -54,7 +54,7 @@ $result = $conn->query($sql);
         </div>
         
         <div class="text-center mt-5">
-            <a href="rooms.php" class="btn btn-primary rounded-pill px-5">View All Rooms</a>
+            <a href="rooms.php" class="btn btn-primary rounded-pill px-5">View all rooms</a>
         </div>
     </div>
 </section>

@@ -45,7 +45,7 @@ require_once 'includes/header.php';
 
 <div class="container py-5 mt-5">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="fw-bold" style="color: var(--primary-color);">My Bookings</h2>
+        <h2 class="fw-bold" style="color: var(--primary-color);">My bookings</h2>
     </div>
     
     <?php if(isset($_GET['success'])): ?>
@@ -72,7 +72,7 @@ require_once 'includes/header.php';
                             <th class="py-3">Room</th>
                             <th class="py-3">Check-in</th>
                             <th class="py-3">Check-out</th>
-                            <th class="py-3">Total Amount</th>
+                            <th class="py-3">Total amount</th>
                             <th class="py-3">Status</th>
                             <th class="py-3 px-4 rounded-end-3">Action</th>
                         </tr>
@@ -100,11 +100,11 @@ require_once 'includes/header.php';
                                     </td>
                                     <td class="py-3 px-4">
                                         <?php if ($row['status'] == 'Pending'): ?>
-                                            <a href="payment.php?id=<?php echo $row['id']; ?>" class="btn btn-sm btn-primary rounded-pill mb-1">Pay Now</a>
+                                            <a href="payment.php?id=<?php echo $row['id']; ?>" class="btn btn-sm btn-primary rounded-pill mb-1">Pay now</a>
                                         <?php endif; ?>
                                         
                                         <?php if ($row['status'] == 'Pending' || $row['status'] == 'Confirmed'): ?>
-                                            <a href="my_bookings.php?cancel=<?php echo $row['id']; ?>" class="btn btn-sm btn-outline-danger rounded-pill" onclick="return confirm('Are You Sure You Want To Cancel This Booking?');">Cancel</a>
+                                            <a href="my_bookings.php?cancel=<?php echo $row['id']; ?>" class="btn btn-sm btn-outline-danger rounded-pill" onclick="return confirm('Are you sure you want to cancel this booking?');">Cancel</a>
                                         <?php endif; ?>
                                         
                                         <?php if ($row['status'] == 'Cancelled' || $row['status'] == 'Checked-out'): ?>
@@ -117,8 +117,8 @@ require_once 'includes/header.php';
                             <tr>
                                 <td colspan="7" class="text-center py-5 text-muted">
                                     <i class="fa-solid fa-folder-open fa-3x mb-3"></i>
-                                    <h5>No Bookings Found</h5>
-                                    <a href="rooms.php" class="btn btn-primary mt-2 rounded-pill px-4">Book A Room</a>
+                                    <h5>No bookings found</h5>
+                                    <a href="rooms.php" class="btn btn-primary mt-2 rounded-pill px-4">Book a room</a>
                                 </td>
                             </tr>
                         <?php endif; ?>

@@ -46,13 +46,13 @@ $type_result = $conn->query($type_sql);
                     <label class="form-label fw-bold">Search</label>
                     <div class="input-group">
                         <span class="input-group-text bg-white border-end-0"><i class="fa-solid fa-magnifying-glass text-muted"></i></span>
-                        <input type="text" name="search" class="form-control border-start-0 ps-0" placeholder="Room Name..." value="<?php echo htmlspecialchars($search); ?>">
+                        <input type="text" name="search" class="form-control border-start-0 ps-2" placeholder="Room name..." value="<?php echo htmlspecialchars($search); ?>">
                     </div>
                 </div>
                 <div class="col-md-4">
                     <label class="form-label fw-bold">Room Type</label>
                     <select name="type" class="form-select">
-                        <option value="">All Types</option>
+                        <option value="">All types</option>
                         <?php if($type_result && $type_result->num_rows > 0): ?>
                             <?php while($t = $type_result->fetch_assoc()): ?>
                                 <option value="<?php echo htmlspecialchars($t['type']); ?>" <?php echo ($type_filter == $t['type']) ? 'selected' : ''; ?>>
@@ -63,7 +63,7 @@ $type_result = $conn->query($type_sql);
                     </select>
                 </div>
                 <div class="col-md-4">
-                    <label class="form-label fw-bold">Max Price: Rs. <span id="priceValue"><?php echo number_format($max_price); ?></span></label>
+                    <label class="form-label fw-bold">Max price: Rs. <span id="priceValue"><?php echo number_format($max_price); ?></span></label>
                     <input type="range" name="max_price" class="form-range" min="0" max="100000" step="1000" value="<?php echo $max_price; ?>" oninput="document.getElementById('priceValue').innerText = Number(this.value).toLocaleString()">
                 </div>
                 
@@ -86,7 +86,7 @@ $type_result = $conn->query($type_sql);
                 </div>
 
                 <div class="col-12 text-center mt-4">
-                    <button type="submit" class="btn btn-primary rounded-pill px-5">Apply Filters</button>
+                    <button type="submit" class="btn btn-primary rounded-pill px-5">Apply filters</button>
                     <a href="rooms.php" class="btn btn-outline-secondary rounded-pill px-4 ms-2">Reset</a>
                 </div>
             </form>
@@ -112,8 +112,8 @@ $type_result = $conn->query($type_sql);
                             </div>
                             <p class="card-text text-muted flex-grow-1"><?php echo substr(htmlspecialchars($row['description']), 0, 100) . '...'; ?></p>
                             <div class="d-flex justify-content-between align-items-center mt-3">
-                                <span class="room-price">Rs. <?php echo number_format($row['price'], 2); ?> <small class="text-muted fs-6 fw-normal">/ Night</small></span>
-                                <a href="room_details.php?id=<?php echo $row['id']; ?>" class="btn btn-outline-danger rounded-pill">View Details</a>
+                                <span class="room-price">Rs. <?php echo number_format($row['price'], 2); ?> <small class="text-muted fs-6 fw-normal">/ night</small></span>
+                                <a href="room_details.php?id=<?php echo $row['id']; ?>" class="btn btn-outline-danger rounded-pill">View details</a>
                             </div>
                         </div>
                     </div>
@@ -122,8 +122,8 @@ $type_result = $conn->query($type_sql);
         <?php else: ?>
             <div class="col-12 text-center py-5">
                 <i class="fa-solid fa-bed-pulse fa-4x text-muted mb-3"></i>
-                <h4 class="text-muted">No Rooms Found</h4>
-                <a href="rooms.php" class="btn btn-outline-primary mt-3 rounded-pill px-4">Clear Filters</a>
+                <h4 class="text-muted">No rooms found</h4>
+                <a href="rooms.php" class="btn btn-outline-primary mt-3 rounded-pill px-4">Clear filters</a>
             </div>
         <?php endif; ?>
     </div>

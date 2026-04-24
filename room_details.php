@@ -33,14 +33,14 @@ require_once 'includes/header.php';
                         <span class="badge bg-secondary fs-6"><?php echo htmlspecialchars($room['type']); ?></span>
                     </div>
                     
-                    <h4 class="room-price mb-4">Rs. <?php echo number_format($room['price'], 2); ?> <span class="text-muted fs-6 fw-normal">/ Night</span></h4>
+                    <h4 class="room-price mb-4">Rs. <?php echo number_format($room['price'], 2); ?> <span class="text-muted fs-6 fw-normal">/ night</span></h4>
                     
                     <h5 class="fw-bold mb-3">Description</h5>
                     <p class="text-muted lh-lg"><?php echo nl2br(htmlspecialchars($room['description'])); ?></p>
                     
                     <hr class="my-4">
                     
-                    <h5 class="fw-bold mb-3">Room Amenities</h5>
+                    <h5 class="fw-bold mb-3">Room amenities</h5>
                     <div class="row g-3">
                         <?php 
                         if (!empty($room['amenities'])) {
@@ -71,11 +71,11 @@ require_once 'includes/header.php';
         <div class="col-lg-4">
             <div class="card border-0 shadow" style="border-radius: 15px; position: sticky; top: 100px;">
                 <div class="card-body p-4">
-                    <h4 class="fw-bold mb-4 text-center">Book This Room</h4>
+                    <h4 class="fw-bold mb-4 text-center">Book this room</h4>
                     
                     <?php if ($room['status'] != 'Available'): ?>
                         <div class="alert alert-warning text-center rounded-pill">
-                            <i class="fa-solid fa-triangle-exclamation me-2"></i>This Room Is Currently Not Available.
+                            <i class="fa-solid fa-triangle-exclamation me-2"></i>This room is currently not available.
                         </div>
                     <?php else: ?>
                         <form method="POST" action="book.php">
@@ -92,12 +92,12 @@ require_once 'includes/header.php';
                             </div>
                             
                             <?php if (isset($_SESSION['user_id'])): ?>
-                                <button type="submit" class="btn btn-primary w-100 btn-lg rounded-pill">Proceed to Booking</button>
+                                <button type="submit" class="btn btn-primary w-100 btn-lg rounded-pill">Proceed to booking</button>
                             <?php else: ?>
                                 <div class="alert alert-info text-center rounded-pill" style="font-size: 0.9rem;">
-                                    Please <a href="login.php" class="fw-bold">Login</a> To Book This Room.
+                                    Please <a href="login.php" class="fw-bold">login</a> to book this room.
                                 </div>
-                                <a href="login.php" class="btn btn-outline-primary w-100 btn-lg rounded-pill">Login to Book</a>
+                                <a href="login.php" class="btn btn-outline-primary w-100 btn-lg rounded-pill">Login to book</a>
                             <?php endif; ?>
                         </form>
                     <?php endif; ?>

@@ -79,7 +79,7 @@ $recent_bookings = $conn->query("SELECT b.*, u.name as user_name, r.name as room
 <div class="card shadow-sm">
     <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
         <h5 class="mb-0 fw-bold">Recent Bookings</h5>
-        <a href="bookings.php" class="btn btn-sm btn-outline-primary">View All</a>
+        <a href="bookings.php" class="btn btn-sm btn-outline-primary">View all</a>
     </div>
     <div class="card-body p-0">
         <div class="table-responsive">
@@ -87,9 +87,9 @@ $recent_bookings = $conn->query("SELECT b.*, u.name as user_name, r.name as room
                 <thead class="bg-light">
                     <tr>
                         <th class="px-4 py-3">ID</th>
-                        <th class="py-3">Guest Name</th>
+                        <th class="py-3">Guest name</th>
                         <th class="py-3">Room</th>
-                        <th class="py-3">Check In - Out</th>
+                        <th class="py-3">Check in - out</th>
                         <th class="py-3">Status</th>
                     </tr>
                 </thead>
@@ -113,7 +113,7 @@ $recent_bookings = $conn->query("SELECT b.*, u.name as user_name, r.name as room
                             </tr>
                         <?php endwhile; ?>
                     <?php else: ?>
-                        <tr><td colspan="5" class="text-center py-4">No Recent Bookings Found.</td></tr>
+                        <tr><td colspan="5" class="text-center py-4">No recent bookings found.</td></tr>
                     <?php endif; ?>
                 </tbody>
             </table>
