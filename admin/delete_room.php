@@ -1,5 +1,6 @@
 <?php
 require_once '../includes/db.php';
+session_start();
 
 if (!isset($_SESSION['admin_id'])) {
     header("Location: login.php");
@@ -13,11 +14,8 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $res = $conn->query("SELECT image FROM rooms WHERE id = '$id'");
     if ($res->num_rows > 0) {
         $img = $res->fetch_assoc()['image'];
-        if (!empty($img)) {
-            $file_to_delete = dirname(__DIR__) . "/uploads/rooms/" . $img;
-            if (file_exists($file_to_delete)) {
-                unlink($file_to_delete);
-            }
+        if (!empty($img) && file_exists("../uploads/rooms/" . $img)) {
+            unlink("../uploads/rooms/" . $img);
         }
     }
     

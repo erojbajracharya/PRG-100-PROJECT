@@ -104,8 +104,8 @@ require_once 'header.php';
                                         <?php if(!empty($row['image'])): ?>
                                             <div class="col-md-4 text-center mt-3 mt-md-0">
                                                 <h6 class="fw-bold mb-3 text-secondary">Uploaded Image:</h6>
-                                                <a href="<?php echo SUPPORT_IMG_PATH . $row['image']; ?>" target="_blank">
-                                                    <img src="<?php echo SUPPORT_IMG_PATH . $row['image']; ?>" class="img-fluid rounded shadow-sm" style="max-height: 300px; object-fit: contain; border: 1px solid #ddd;">
+                                                <a href="../uploads/support/<?php echo $row['image']; ?>" target="_blank">
+                                                    <img src="../uploads/support/<?php echo $row['image']; ?>" class="img-fluid rounded shadow-sm" style="max-height: 300px; object-fit: contain; border: 1px solid #ddd;">
                                                 </a>
                                                 <div class="mt-2 small text-muted">Click image to view full size</div>
                                             </div>

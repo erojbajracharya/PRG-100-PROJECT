@@ -13,8 +13,7 @@ if (!defined('BASE_URL')) {
     $project_root = str_replace('\\', '/', dirname(dirname(__FILE__)));
     $doc_root = str_replace('\\', '/', $_SERVER['DOCUMENT_ROOT']);
     
-    // Case-insensitive replacement for Windows paths
-    $base_dir = str_ireplace($doc_root, '', $project_root);
+    $base_dir = str_replace($doc_root, '', $project_root);
     // Ensure base_dir starts with / but doesn't end with /
     if ($base_dir == '') $base_dir = '';
     else if ($base_dir[0] !== '/') $base_dir = '/' . $base_dir;
