@@ -31,12 +31,13 @@ $room = $result->fetch_assoc();
 // Calculate total price
 $date1 = new DateTime($check_in);
 $date2 = new DateTime($check_out);
-$interval = $date1->diff($date2);
-$days = $interval->days;
 
-if ($days < 1) {
+if ($date2 <= $date1) {
     die("Invalid dates. Check-out must be after Check-in.");
 }
+
+$interval = $date1->diff($date2);
+$days = $interval->days;
 
 $total_price = $days * $room['price'];
 

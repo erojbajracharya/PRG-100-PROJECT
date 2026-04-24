@@ -3,7 +3,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 // Get base URL dynamically
-$baseUrl = '/PRG 100 PROJECT';
+$baseUrl = '/PRG-100-PROJECT';
 ?>
 <!DOCTYPE html>
 <html lang="en">

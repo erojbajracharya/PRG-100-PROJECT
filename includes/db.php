@@ -11,7 +11,7 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     // If DB doesn't exist, redirect to init.php
     if ($conn->connect_errno == 1049) { // Unknown database
-        header("Location: /PRG 100 PROJECT/init.php");
+        header("Location: /PRG-100-PROJECT/init.php");
         exit();
     }
     die("Connection failed: " . $conn->connect_error);

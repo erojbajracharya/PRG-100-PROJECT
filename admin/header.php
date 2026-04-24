@@ -7,7 +7,7 @@ if (!isset($_SESSION['admin_id']) && basename($_SERVER['PHP_SELF']) != 'login.ph
     exit();
 }
 // Get base URL dynamically
-$baseUrl = '/PRG 100 PROJECT';
+$baseUrl = '/PRG-100-PROJECT';
 ?>
 <!DOCTYPE html>
 <html lang="en">
